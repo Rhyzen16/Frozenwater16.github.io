@@ -20,6 +20,23 @@
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
+            position: relative; /* Added for positioning the bubbles */
+        }
+        .bubble {
+            position: absolute;
+            background-color: #87CEEB; /* Light blue color */
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
         h1 {
             margin-bottom: 5px;
@@ -39,7 +56,13 @@
     </style>
 </head>
 <body>
-    <div class="card">
+    <div class="card" id="contactCard">
+        <!-- Bubbles -->
+        <div class="bubble" style="top: 10px; left: 10px;"></div>
+        <div class="bubble" style="top: 30px; left: 50px;"></div>
+        <div class="bubble" style="top: 60px; left: 150px;"></div>
+
+        <!-- Contact Card Content -->
         <img src="ItsChaosticom.gif" alt="5 Month Hardwork">
         <h1>Rhyzen Christopher S. Bamba</h1>
         <p>Surveyon</p> 
@@ -47,6 +70,21 @@
         <p>Email: rhyzensb@gmail.com</p>
         <p>Phone: +63-9166509018</p>
         <p>Website: <a href="https://yourwebsite.com" style="color: #007bff; text-decoration: none;">yourwebsite.com</a></p>
+
+        <script>
+            // JavaScript for bubble bounce on mouseover
+            const bubbles = document.querySelectorAll('.bubble');
+
+            bubbles.forEach(bubble => {
+                bubble.addEventListener('mouseover', () => {
+                    bubble.style.animation = 'bounce 0.5s ease-out';
+                });
+
+                bubble.addEventListener('animationend', () => {
+                    bubble.style.animation = 'float 5s infinite';
+                });
+            });
+        </script>
     </div>
 </body>
 </html>

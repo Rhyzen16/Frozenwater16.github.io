@@ -2,13 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>My Table,onContact</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact card for Rhyzen Christopher S. Bamba with animated bubbles background.">
+    <title>My Table, onContact</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
             overflow: hidden; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             position: relative;
         }
         .card {
@@ -52,7 +58,7 @@
 <body>
     <div class="card" id="contactCard">
         <!-- Contact Card Content -->
-        <img src="ItsChaosticom.gif" alt="5 Month Hardwork">
+        <img src="ItsChaosticom.gif" alt="5 Month Hardwork - ItsChaosticom">
         <h1>Rhyzen Christopher S. Bamba</h1>
         <p>Surveyon</p> 
         <p>Frozenwater</p>
@@ -67,41 +73,34 @@
             bubble.className = 'bubble';
             document.body.appendChild(bubble);
 
-             
             const size = Math.random() * 30 + 20; // Size between 20px and 50px
             bubble.style.width = `${size}px`;
             bubble.style.height = `${size}px`;
             bubble.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`; // Random color
 
-            
             let x = Math.random() * (window.innerWidth - size);
             let y = Math.random() * (window.innerHeight - size);
             bubble.style.left = `${x}px`;
             bubble.style.top = `${y}px`;
 
-             
             let dx = (Math.random() - 0.5) * 2;
             let dy = (Math.random() - 0.5) * 2;
 
             function animateBubble() {
-                
                 if (x + dx < 0 || x + dx > window.innerWidth - size) dx *= -1;
                 if (y + dy < 0 || y + dy > window.innerHeight - size) dy *= -1;
 
-                
                 x += dx;
                 y += dy;
                 bubble.style.left = `${x}px`;
                 bubble.style.top = `${y}px`;
 
-                
                 requestAnimationFrame(animateBubble);
             }
 
             animateBubble();
         }
 
-    
         for (let i = 0; i < 20; i++) {
             createBubble();
         }

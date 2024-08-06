@@ -8,10 +8,8 @@
             font-family: 'Arial', sans-serif;
             background-color: #f5f5f5;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            overflow: hidden; 
+            position: relative;
         }
         .card {
             background-color: #fff;
@@ -20,23 +18,15 @@
             border-radius: 8px;
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
             text-align: center;
-            position: relative; /* Added for positioning the bubbles */
+            position: relative;
+            z-index: 1; /* Ensure the card is above the bubbles */
         }
         .bubble {
             position: absolute;
-            background-color: #555; /* Dark gray color */
             border-radius: 50%;
             width: 30px;
             height: 30px;
-            animation: float 5s infinite;
-        }
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
+            background-color: hsl(var(--hue), 70%, 50%); /* Dynamic color */
         }
         h1 {
             margin-bottom: 5px;
@@ -53,19 +43,14 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="card" id="contactCard">
-        <!-- Bubbles -->
-        <div class="bubble" style="top: 10px; left: 10px;"></div>
-        <div class="bubble" style="top: 30px; left: 50px;"></div>
-        <div class="bubble" style="top: 60px; left: 150px;"></div>
-        <div class="bubble" style="top: 120px; left: 80px;"></div>
-        <div class="bubble" style="top: 150px; left: 200px;"></div>
-        <div class="bubble" style="top: 180px; left: 120px;"></div>
-        <!-- Add more bubbles as needed -->
-
         <!-- Contact Card Content -->
         <img src="ItsChaosticom.gif" alt="5 Month Hardwork">
         <h1>Rhyzen Christopher S. Bamba</h1>
@@ -73,22 +58,53 @@
         <p>Frozenwater</p>
         <p>Email: rhyzensb@gmail.com</p>
         <p>Phone: +63-9166509018</p>
-        <p>Website: <a href="https://yourwebsite.com" style="color: #007bff; text-decoration: none;">yourwebsite.com</a></p>
-
-        <script>
-            // JavaScript for bubble bounce on mouseover
-            const bubbles = document.querySelectorAll('.bubble');
-
-            bubbles.forEach(bubble => {
-                bubble.addEventListener('mouseover', () => {
-                    bubble.style.animation = 'bounce 0.5s ease-out';
-                });
-
-                bubble.addEventListener('animationend', () => {
-                    bubble.style.animation = 'float 5s infinite';
-                });
-            });
-        </script>
+        <p>Website: <a href="https://yourwebsite.com">yourwebsite.com</a></p>
     </div>
+
+    <script>
+        function createBubble() {
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            document.body.appendChild(bubble);
+
+             
+            const size = Math.random() * 30 + 20; // Size between 20px and 50px
+            bubble.style.width = `${size}px`;
+            bubble.style.height = `${size}px`;
+            bubble.style.backgroundColor = `hsl(${Math.random() * 360}, 70%, 50%)`; // Random color
+
+            
+            let x = Math.random() * (window.innerWidth - size);
+            let y = Math.random() * (window.innerHeight - size);
+            bubble.style.left = `${x}px`;
+            bubble.style.top = `${y}px`;
+
+             
+            let dx = (Math.random() - 0.5) * 2;
+            let dy = (Math.random() - 0.5) * 2;
+
+            function animateBubble() {
+                
+                if (x + dx < 0 || x + dx > window.innerWidth - size) dx *= -1;
+                if (y + dy < 0 || y + dy > window.innerHeight - size) dy *= -1;
+
+                
+                x += dx;
+                y += dy;
+                bubble.style.left = `${x}px`;
+                bubble.style.top = `${y}px`;
+
+                
+                requestAnimationFrame(animateBubble);
+            }
+
+            animateBubble();
+        }
+
+    
+        for (let i = 0; i < 20; i++) {
+            createBubble();
+        }
+    </script>
 </body>
 </html>
